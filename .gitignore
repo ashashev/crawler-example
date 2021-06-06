@@ -1,0 +1,8 @@
+.idea/
+.bsp/
+application.local.conf
+target/
+report.csv
+fdb.cluster
+.DS_Store
+.jvmopts

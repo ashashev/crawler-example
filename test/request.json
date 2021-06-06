@@ -1,0 +1,8 @@
+{
+    "sites": [
+        "https://google.ru",
+        "https://github.com",
+        "https://www.notfound.nf/",
+        "http://localhost:8080/noPage"
+    ]
+}
