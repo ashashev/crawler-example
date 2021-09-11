@@ -1,12 +1,19 @@
 val Http4sVersion = "0.21.24"
 val CirceVersion = "0.14.1"
 val MunitVersion = "0.7.26"
-val LogbackVersion = "1.2.3"
-val ScalaLoggingVersion = "3.9.3"
 val MunitCatsEffectVersion = "0.13.0"
 val HtmlCleanerVersion = "2.6.1"
 val SupertaggedVersion = "2.0-RC2"
 val PureconfigVersion = "0.15.0"
+val slf4jJdkVersion = "1.7.32"
+
+enablePlugins(JavaAppPackaging)
+enablePlugins(GraalVMNativeImagePlugin)
+
+graalVMNativeImageOptions ++= Seq(
+  "-H:ResourceConfigurationFiles=" + baseDirectory.value / "graal" / "resource-config.json",
+  "--no-fallback"
+)
 
 lazy val root = (project in file("."))
   .settings(
@@ -14,6 +21,7 @@ lazy val root = (project in file("."))
     name := "crawler",
     version := "0.0.1-SNAPSHOT",
     scalaVersion := "2.13.6",
+    maintainer := "ashashev@gmail.com",
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-blaze-server" % Http4sVersion,
       "org.http4s" %% "http4s-blaze-client" % Http4sVersion,
@@ -23,11 +31,10 @@ lazy val root = (project in file("."))
       "io.circe" %% "circe-parser" % CirceVersion,
       "org.scalameta" %% "munit" % MunitVersion % Test,
       "org.typelevel" %% "munit-cats-effect-2" % MunitCatsEffectVersion % Test,
-      "ch.qos.logback" % "logback-classic" % LogbackVersion,
-      "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion,
       "net.sourceforge.htmlcleaner" % "htmlcleaner" % HtmlCleanerVersion,
       "org.rudogma" %% "supertagged" % SupertaggedVersion,
       "com.github.pureconfig" %% "pureconfig" % PureconfigVersion,
+      "org.slf4j" % "slf4j-jdk14" % slf4jJdkVersion,
       "org.scalameta" %% "svm-subs" % "20.2.0"
     ),
     scalacOptions ++= Flags.scalacFlags,
